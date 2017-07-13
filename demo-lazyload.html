@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #comics {
+                margin: 0 auto;
+                list-style: none;
+                padding: 0;
+                width: 600px;
+            }
+            .comic {
+                margin: 20px 0;
+            }
+            .info {
+                background-repeat: no-repeat;
+                border-bottom: 1px dotted #eee;
+                color: #333;
+                display: block;
+                font-size: 16px;
+                padding: 310px 10px 10px;
+                text-align: right;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="comics"></ul>
+        <script src="comics.js"></script>
+        <script>
+            const template = comics => `
+                ${comics.map(comic => `
+                    <li class="comic" data-id="${comic.id}">
+                        <a href="https://www.lezhin.com/comic/${comic.alias}" class="info">${comic.title}</a>
+                    </li>
+                `).join('')}
+            `;
+
+            document.getElementById('comics').innerHTML = template(comics);
+
+            const io = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    const target = entry.target;
+                    const id = target.dataset.id;
+
+                    target.querySelector('.info').style.backgroundImage = `url(https://cdn.lezhin.com/v2/comics/${id}/images/wide?width=600)`;
+
+                    observer.unobserve(target);
+                });
+            });
+
+            Array.from(document.querySelectorAll('.comic')).forEach(el => {
+                io.observe(el);
+            });
+        </script>
+    </body>
+</html>

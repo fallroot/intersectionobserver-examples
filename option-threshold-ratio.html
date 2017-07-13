@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="main.css" rel="stylesheet">
+        <style>
+            .example {
+                display: flex;
+                justify-content: center;
+                margin: 150vh auto;
+            }
+            .box {
+                height: 200px;
+                line-height: 200px;
+                margin: 0 20px;
+                position: relative;
+            }
+            .box:after {
+                bottom: 20px;
+                color: #ccc;
+                content: attr(data-value);
+                display: block;
+                font-size: 12px;
+                font-weight: lighter;
+                height: 20px;
+                line-height: 20px;
+                position: absolute;
+                text-align: center;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="example">
+            <div class="box" data-value="2 thresholds">#1</div>
+            <div class="box" data-value="3 thresholds">#2</div>
+            <div class="box" data-value="5 thresholds">#3</div>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            const ios = [];
+
+            ios[0] = new IntersectionObserver(updateIndicatorByRatio, {
+                threshold: [0, 1]
+            });
+            ios[1] = new IntersectionObserver(updateIndicatorByRatio, {
+                threshold: [0, 0.5, 1]
+            });
+            ios[2] = new IntersectionObserver(updateIndicatorByRatio, {
+                threshold: [0, 0.25, 0.5, 0.75, 1]
+            });
+
+            Array.from(document.querySelectorAll('.box')).forEach((box, index) => {
+                ios[index].observe(box);
+            });
+        </script>
+    </body>
+</html>

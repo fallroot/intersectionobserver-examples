@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="main.css" rel="stylesheet">
+        <style>
+            body {
+                white-space: nowrap;
+            }
+            .example {
+                margin: 70px 150vw 20px;
+            }
+            .box {
+                display: inline-block;
+                margin-right: 40px;
+            }
+            .box:last-child {
+                margin-right: 0;
+            }
+            .spacer {
+                display: inline-block;
+                width: 150vw;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="example">
+            <div class="box">#1</div>
+            <div class="box">#2</div>
+            <div class="box">#3</div>
+            <div class="box">#4</div>
+            <div class="spacer"></div>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            const io = new IntersectionObserver(updateIndicator);
+
+            Array.from(document.querySelectorAll('.box')).forEach(box => {
+                io.observe(box);
+            });
+        </script>
+    </body>
+</html>

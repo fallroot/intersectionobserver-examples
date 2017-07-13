@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="main.css" rel="stylesheet">
+        <style>
+            .example {
+                margin-top: 70px;
+            }
+            .wrap {
+                display: none;
+            }
+            .wrap.visible {
+                display: flex;
+                justify-content: center;
+            }
+            .box {
+                display: inline-block;
+                margin: 0 10px;
+            }
+            #unfold {
+                background: #fff;
+                border: 1px solid #333;
+                border-radius: 4px;
+                bottom: 10px;
+                color: #333;
+                padding: 10px;
+                position: fixed;
+                right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="example">
+            <button id="unfold">Click to fold / unfold</button>
+            <div class="wrap">
+                <div class="box">#1</div>
+                <div class="box">#2</div>
+                <div class="box">#3</div>
+            </div>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            const io = new IntersectionObserver(updateIndicator);
+
+            Array.from(document.querySelectorAll('.box')).forEach(box => {
+                io.observe(box);
+            });
+
+            document.getElementById('unfold').addEventListener('click', event => {
+                document.querySelector('.wrap').classList.toggle('visible');
+            });
+        </script>
+    </body>
+</html>

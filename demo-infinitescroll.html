@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                color: #333;
+                font-family: monospace;
+                margin: 0;
+                padding: 0;
+            }
+            .item {
+                margin: 0;
+                padding: 20px 0;
+                text-align: center;
+            }
+            .item:nth-child(even) {
+                background: #eee;
+            }
+            #sentinel {
+                height: 10px;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="items"></div>
+        <p id="sentinel"></p>
+        <script>
+            const count = 20;
+            let index = 0;
+
+            function loadItems() {
+                const fragment = document.createDocumentFragment();
+
+                for (let i = index + 1; i <= index + count; ++i) {
+                    const item = document.createElement('p');
+
+                    item.classList.add('item');
+                    item.textContent = `#${i}`;
+
+                    fragment.appendChild(item);
+                }
+
+                document.getElementById('items').appendChild(fragment);
+                index += count;
+            }
+
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    loadItems();
+                });
+            });
+
+            io.observe(document.getElementById('sentinel'));
+
+            loadItems();
+        </script>
+    </body>
+</html>

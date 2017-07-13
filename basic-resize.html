@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="main.css" rel="stylesheet">
+        <style>
+            .example {
+                margin: 60px 0;
+            }
+            .box {
+                margin: 0 auto 40px;
+            }
+            .box:last-child {
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="example">
+            <div class="box">#1</div>
+            <div class="box">#2</div>
+            <div class="box">#3</div>
+            <div class="box">#4</div>
+            <div class="box">#5</div>
+            <div class="box">#6</div>
+            <div class="box">#7</div>
+            <div class="box">#8</div>
+            <div class="box">#9</div>
+            <div class="box">#10</div>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            const io = new IntersectionObserver(updateIndicator);
+
+            Array.from(document.querySelectorAll('.box')).forEach(box => {
+                io.observe(box);
+            });
+        </script>
+    </body>
+</html>

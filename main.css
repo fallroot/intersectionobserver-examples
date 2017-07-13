@@ -1,0 +1,62 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #f0f0f0;
+}
+.box {
+    background: #e50020;
+    color: #fff;
+    font: bold 32px monospace;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    width: 100px;
+}
+.indicator {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.indicator-item {
+    background: #ccc;
+    border-radius: 50%;
+    color: #fff;
+    font: bold 16px monospace;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 10px;
+    position: relative;
+    text-align: center;
+    width: 30px;
+}
+.indicator-item:after {
+    /* background: rgba(130, 260, 0, 1); */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+.indicator-item.on {
+    background: #a0e600;
+}
+.indicator-item.pulse:after {
+    animation: pulse-animation 0.5s;
+}
+
+@keyframes pulse-animation {
+  to {
+    background: rgba(0, 0, 0, 0);
+    transform: scale(1.5);
+  }
+}
